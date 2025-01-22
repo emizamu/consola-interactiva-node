@@ -28,12 +28,18 @@ require('colors');
     
     const pausa = async () => {
         
-        await input({ message: `Presione ${'Enter'.green} para continuar` });
+        await input({ message: `Presione ${'ENTER'.green} para continuar` });
+    }
+
+    const pregunta = async (message = '') => {
+
+        const respuesta = await input({message, required: true});
+        return respuesta;
     }
 
     
-
     module.exports = {
         inquirerMenu,
         pausa,
+        pregunta,
     }
