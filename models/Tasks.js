@@ -28,6 +28,18 @@ class Tasks {
         })
     }
 
+    completeList () {
+
+        console.log(); // Simplemente salto de linea
+        this.listadoArray.forEach((task, i) => {
+            const {desc,completadoEn} = task;
+            const indx = `${i + 1}`.green;
+            const status = (completadoEn) ? `Completado`.green : `Pendiente`.red;
+            console.log(`${indx}. ${desc} :: ${status}`);
+        })
+        return null;
+    }
+
 }
 
 
