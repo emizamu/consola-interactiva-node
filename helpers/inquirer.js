@@ -9,7 +9,7 @@ require('colors');
         console.log('  Seleccione una opción'.green);
         console.log('========================='.green);
         
-        const preguntas = await select ({
+        const questions = await select ({
             message: '¿Que desea hacer?',
             choices: [
                 {name: `${'1.'.green} Crear Tarea`, value: 1},
@@ -22,24 +22,24 @@ require('colors');
             ]
         }); 
 
-        return preguntas;
+        return questions;
 
     };
     
-    const pausa = async () => {
+    const pause = async () => {
         
         await input({ message: `Presione ${'ENTER'.green} para continuar` });
     }
 
-    const pregunta = async (message = '') => {
+    const question = async (message = '') => {
 
-        const respuesta = await input({message, required: true});
-        return respuesta;
+        const answer = await input({message, required: true});
+        return answer;
     }
 
     
     module.exports = {
         inquirerMenu,
-        pausa,
-        pregunta,
+        pause,
+        question,
     }

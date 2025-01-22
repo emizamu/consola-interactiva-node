@@ -1,6 +1,6 @@
 const { v4: uuidv4 } = require('uuid'); // Se nombra v4 al uuidv4 que se importa
 
-class Tarea {
+class Task {
 
     id = '';
     desc = '';
@@ -16,4 +16,4 @@ class Tarea {
 
 };
 
-module.exports = Tarea;
+module.exports = Task;
