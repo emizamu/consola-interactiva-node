@@ -1,5 +1,11 @@
 require ('colors');
-const {inquirerMenu, pause, question, deleteTasksView,messageConfirm} = require('./helpers/inquirer');
+const {
+  inquirerMenu, 
+  pause, 
+  question, 
+  deleteTasksView,
+  messageConfirm,
+  changeTasksStatusView } = require('./helpers/inquirer');
 const {saveDB, readDB} = require('./helpers/fileSystem');
 const Tasks = require ('./models/Tasks');
 
@@ -34,6 +40,13 @@ if (TasksDB) {
         tareas.completedTasksList(false);
         break;
       case 5:
+        if (tareas.listadoArray.length === 0) {
+          console.log('\nNo hay tareas disponibles para actualizar.\n'.red);
+      } else {
+          const ids = await changeTasksStatusView(tareas.listadoArray);
+          tareas.toggleCompleted(ids);
+          console.log('\nEstado de tareas actualizado correctamente.\n'.green);
+      }
         break;
       case 6:
           console.log();

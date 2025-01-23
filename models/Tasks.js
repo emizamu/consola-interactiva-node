@@ -39,9 +39,9 @@ class Tasks {
         console.log(); // Simplemente salto de linea
         this.listadoArray.forEach((task, i) => {
             const {desc,completadoEn} = task;
-            const indx = `${i + 1}`.green;
+            const indx = `${i + 1}.`.green;
             const status = (completadoEn) ? `Completado`.green : `Pendiente`.red;
-            console.log(`${indx}. ${desc} :: ${status}`);
+            console.log(`${indx} ${desc} :: ${status}`);
         })
         return null;
     }
@@ -51,17 +51,36 @@ class Tasks {
         let count = 1; 
         this.listadoArray.forEach( task => {
             const {desc,completadoEn} = task;
-            const indx = `${count}`.green;
+            const indx = `${count}.`.green;
             const status = (completadoEn) ? `Completado`.green : `Pendiente`.red;
             if(completed && completadoEn){
-            console.log(`${indx}. ${desc} :: ${completadoEn}`);
+            console.log(`${indx} ${desc} :: ${completadoEn.green}`);
+            count++;
             }
             else if (!completed && !completadoEn){
-            console.log(`${indx}. ${desc} :: ${status}`); 
-            }
+            console.log(`${indx} ${desc} :: ${status}`); 
             count++;
+            }
+            
         })
         return null;
+    }
+
+    toggleCompleted (ids = []) { // Se pasan solo las ids que fueron seleccionadas o desseleccionadas
+
+        ids.forEach(id => {
+
+            const tarea = this._listado[id];
+            if(!tarea.completadoEn){
+                tarea.completadoEn = new Date().toISOString() // Pasa la fecha a string
+            }
+        })
+
+        this.listadoArray.forEach ((task) =>{
+            if(!ids.includes(task.id)){
+                this._listado[task.id].completadoEn = null;
+            }
+        })
     }
 
 }

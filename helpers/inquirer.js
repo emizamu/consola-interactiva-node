@@ -1,4 +1,4 @@
-const {select, input, confirm} = require ('@inquirer/prompts');
+const {select, input, confirm, checkbox} = require ('@inquirer/prompts');
 require('colors');
 
 
@@ -48,7 +48,7 @@ require('colors');
             }
         });
 
-        choices.unshift({
+        choices.unshift({ // Agrega una opcion al principio
             value: 0,
             name: `0. `.green + `Cancelar`
         })
@@ -69,11 +69,34 @@ require('colors');
         return answer;
     }
 
+    const changeTasksStatusView = async (tasks = [] ) => {
+        
+        const choices = tasks.map ((task, i) => {
+            const indx = `${i + 1}. `.green;
+
+            return {
+                value: task.id,
+                name: `${indx} ${task.desc}`,
+                checked: (task.completadoEn) ? true : false, // Muestra check las tareas completadas
+            }
+        });
+
+        const questions = await checkbox (
+            {   
+                message: 'Select',
+                choices
+            }
+        ); 
+
+        return questions;
+
+    }
     
     module.exports = {
         inquirerMenu,
         pause,
         question,
         deleteTasksView,
-        messageConfirm
+        messageConfirm,
+        changeTasksStatusView
     }
