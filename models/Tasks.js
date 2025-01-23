@@ -13,6 +13,12 @@ class Tasks {
         this._listado[tarea.id] = tarea; // Se pasa tarea.id como referencia para guardarlo en el listado
     }
 
+    deleteTask(id = ''){
+        if(this._listado[id]){
+            delete this._listado[id];
+        }
+    }
+
     get listadoArray(){
         let listado = [];
         Object.keys(this._listado).forEach(keys => { //* Metodo de JS donde se pueden traer las keys de este objeto

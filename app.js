@@ -1,5 +1,5 @@
 require ('colors');
-const {inquirerMenu, pause, question} = require('./helpers/inquirer');
+const {inquirerMenu, pause, question, deleteTasksView,messageConfirm} = require('./helpers/inquirer');
 const {saveDB, readDB} = require('./helpers/fileSystem');
 const Tasks = require ('./models/Tasks');
 
@@ -36,11 +36,18 @@ if (TasksDB) {
       case 5:
         break;
       case 6:
+          console.log();
+          const toDelete = await deleteTasksView(tareas.listadoArray);
+          if (toDelete != 0) {
+            const ok = await messageConfirm('¿Está seguro?');
+            if (ok){
+              tareas.deleteTask(toDelete);
+              console.log('Tarea borrada'.green);
+            }
+          };
         break;
-      default:
-        saveDB(tareas.listadoArray);
-         break;
     }
+    saveDB(tareas.listadoArray);
 
     if(opt != 0){
       console.log('\n')

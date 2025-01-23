@@ -1,4 +1,4 @@
-const {select, input} = require ('@inquirer/prompts');
+const {select, input, confirm} = require ('@inquirer/prompts');
 require('colors');
 
 
@@ -37,9 +37,43 @@ require('colors');
         return answer;
     }
 
+    const deleteTasksView = async (tasks = [] ) => {
+        
+        const choices = tasks.map ((task, i) => {
+            const indx = `${i + 1}. `.green;
+
+            return {
+                value: task.id,
+                name: `${indx} ${task.desc}`
+            }
+        });
+
+        choices.unshift({
+            value: 0,
+            name: `0. `.green + `Cancelar`
+        })
+
+        const questions = await select (
+            {   
+                message: 'Borrar',
+                choices
+            }
+        );
+
+        return questions;
+
+    }
+
+    const messageConfirm = async (message) => {
+        const answer = await confirm({ message });
+        return answer;
+    }
+
     
     module.exports = {
         inquirerMenu,
         pause,
         question,
+        deleteTasksView,
+        messageConfirm
     }
