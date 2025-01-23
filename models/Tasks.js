@@ -8,7 +8,7 @@ class Tasks {
         this._listado = {};
     }
     
-    crearTarea(desc){
+    createTask(desc){
         const tarea = new Task(desc); // Crea tarea con id unico
         this._listado[tarea.id] = tarea; // Se pasa tarea.id como referencia para guardarlo en el listado
     }
@@ -36,6 +36,24 @@ class Tasks {
             const indx = `${i + 1}`.green;
             const status = (completadoEn) ? `Completado`.green : `Pendiente`.red;
             console.log(`${indx}. ${desc} :: ${status}`);
+        })
+        return null;
+    }
+
+    completedTasksList ( completed = true) {
+        console.log(); // Simplemente salto de linea
+        let count = 1; 
+        this.listadoArray.forEach( task => {
+            const {desc,completadoEn} = task;
+            const indx = `${count}`.green;
+            const status = (completadoEn) ? `Completado`.green : `Pendiente`.red;
+            if(completed && completadoEn){
+            console.log(`${indx}. ${desc} :: ${completadoEn}`);
+            }
+            else if (!completed && !completadoEn){
+            console.log(`${indx}. ${desc} :: ${status}`); 
+            }
+            count++;
         })
         return null;
     }

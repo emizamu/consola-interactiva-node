@@ -22,14 +22,16 @@ if (TasksDB) {
       case 1:
         const desc = await question('Indique descripción: ');
         console.log(desc);
-        tareas.crearTarea(desc);
+        tareas.createTask(desc);
         break;
       case 2:
         tareas.completeList();
          break;
       case 3:
+        tareas.completedTasksList(true);
           break;
       case 4:
+        tareas.completedTasksList(false);
         break;
       case 5:
         break;
