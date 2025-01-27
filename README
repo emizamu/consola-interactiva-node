@@ -15,13 +15,6 @@ This interactive command-line application allows users to create, list, update, 
 
 - Node.js installed on your machine.
 
-## Installation
-
-1. Clone the repository to your local machine:
-   ```bash
-   git clone https://github.com/your-username/task-cli-app.git
-   cd task-cli-app
-
 ## Install dependencies:
 
 npm install
